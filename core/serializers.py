@@ -9,6 +9,11 @@ class UserSerializer(ModelSerializer):
         model=User
         fields=['first_name', 'last_name', 'username', 'email', 'role']
 
+class RegisterSerializer(ModelSerializer):
+    class Meta:
+        model=User
+        fields=['first_name', 'last_name', 'username', 'email', 'role', 'password']
+
 class QuizSerializer(ModelSerializer):
     user=UserSerializer(read_only=True)
     class Meta:
