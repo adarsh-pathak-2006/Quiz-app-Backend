@@ -5,15 +5,17 @@ class User(AbstractUser):
     STUDENT='STUDENT'
     TEACHER='TEACHER'
 
-    ROLE_CHOICES=models.CharField(max_length=7, choices=[(STUDENT, 'Student'), (TEACHER, 'Teacher')])
+    ROLE_CHOICES=[(STUDENT, 'Student'), (TEACHER, 'Teacher')]
+
+    role=models.CharField(max_length=7, choices=ROLE_CHOICES)
 
 
 class Quiz(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE)
     topic=models.CharField(max_length=100)
     difficulty=models.models.CharField(choices=[('EASY', 'Easy'), ('MEDIUM', 'Medium'), ('HARD', 'Hard')] , max_length=6)
+    no_of_ques=models.PositiveIntegerField()
     created_at=models.DateTimeField(auto_now_add=True)
-    question_type=models.CharField(max_length=10, choices=[('MCQ', 'Mcq'), ('SUBJECTIVE', 'Subjective')])
     
 
     def __str__(self):
